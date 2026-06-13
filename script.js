@@ -1,14 +1,54 @@
-// Word list for typing practice
-const wordList = [
-    'the', 'quick', 'brown', 'fox', 'jumps', 'over', 'lazy', 'dog',
-    'programming', 'javascript', 'typing', 'practice', 'speed', 'accuracy',
-    'keyboard', 'computer', 'developer', 'code', 'function', 'variable',
-    'array', 'object', 'string', 'number', 'boolean', 'promise',
-    'async', 'await', 'class', 'method', 'property', 'algorithm',
-    'database', 'network', 'server', 'client', 'request', 'response',
-    'document', 'window', 'element', 'attribute', 'style', 'color',
-    'background', 'margin', 'padding', 'border', 'shadow', 'transform',
-    'animation', 'transition', 'display', 'position', 'absolute', 'relative'
+// Japanese word list with kanji, furigana, and romaji
+const japaneseWords = [
+    { kanji: '林檎', furigana: 'りんご', romaji: 'ringo' },
+    { kanji: '蜜柑', furigana: 'みかん', romaji: 'mikan' },
+    { kanji: '葡萄', furigana: 'ぶどう', romaji: 'budou' },
+    { kanji: '桜', furigana: 'さくら', romaji: 'sakura' },
+    { kanji: '月', furigana: 'つき', romaji: 'tsuki' },
+    { kanji: '太陽', furigana: 'たいよう', romaji: 'taiyou' },
+    { kanji: '星', furigana: 'ほし', romaji: 'hoshi' },
+    { kanji: '雲', furigana: 'くも', romaji: 'kumo' },
+    { kanji: '雨', furigana: 'あめ', romaji: 'ame' },
+    { kanji: '風', furigana: 'かぜ', romaji: 'kaze' },
+    { kanji: '火', furigana: 'ひ', romaji: 'hi' },
+    { kanji: '水', furigana: 'みず', romaji: 'mizu' },
+    { kanji: '木', furigana: 'き', romaji: 'ki' },
+    { kanji: '花', furigana: 'はな', romaji: 'hana' },
+    { kanji: '鳥', furigana: 'とり', romaji: 'tori' },
+    { kanji: '魚', furigana: 'さかな', romaji: 'sakana' },
+    { kanji: '猫', furigana: 'ねこ', romaji: 'neko' },
+    { kanji: '犬', furigana: 'いぬ', romaji: 'inu' },
+    { kanji: '兎', furigana: 'うさぎ', romaji: 'usagi' },
+    { kanji: '熊', furigana: 'くま', romaji: 'kuma' },
+    { kanji: '山', furigana: 'やま', romaji: 'yama' },
+    { kanji: '川', furigana: 'かわ', romaji: 'kawa' },
+    { kanji: '海', furigana: 'うみ', romaji: 'umi' },
+    { kanji: '島', furigana: 'しま', romaji: 'shima' },
+    { kanji: '橋', furigana: 'はし', romaji: 'hashi' },
+    { kanji: '道', furigana: 'みち', romaji: 'michi' },
+    { kanji: '家', furigana: 'いえ', romaji: 'ie' },
+    { kanji: '学校', furigana: 'がっこう', romaji: 'gakkou' },
+    { kanji: '本', furigana: 'ほん', romaji: 'hon' },
+    { kanji: '紙', furigana: 'かみ', romaji: 'kami' },
+    { kanji: 'ペン', furigana: 'ぺん', romaji: 'pen' },
+    { kanji: '机', furigana: 'つくえ', romaji: 'tsukue' },
+    { kanji: '椅子', furigana: 'いす', romaji: 'isu' },
+    { kanji: '友達', furigana: 'ともだち', romaji: 'tomodachi' },
+    { kanji: '家族', furigana: 'かぞく', romaji: 'kazoku' },
+    { kanji: '父', furigana: 'ちち', romaji: 'chichi' },
+    { kanji: '母', furigana: 'はは', romaji: 'haha' },
+    { kanji: '兄', furigana: 'あに', romaji: 'ani' },
+    { kanji: '妹', furigana: 'いもうと', romaji: 'imouto' },
+    { kanji: '先生', furigana: 'せんせい', romaji: 'sensei' },
+    { kanji: '学生', furigana: 'がくせい', romaji: 'gakusei' },
+    { kanji: '医者', furigana: 'いしゃ', romaji: 'isha' },
+    { kanji: '看護師', furigana: 'かんごし', romaji: 'kangoshi' },
+    { kanji: 'レストラン', furigana: 'れすとらん', romaji: 'resutoran' },
+    { kanji: 'コンピュータ', furigana: 'こんぴゅーた', romaji: 'konpyuuta' },
+    { kanji: 'インターネット', furigana: 'いんたーねっと', romaji: 'intaanetto' },
+    { kanji: '電話', furigana: 'でんわ', romaji: 'denwa' },
+    { kanji: 'テレビ', furigana: 'てれび', romaji: 'terebi' },
+    { kanji: '写真', furigana: 'しゃしん', romaji: 'shashin' }
 ];
 
 // Game state
@@ -21,14 +61,18 @@ let gameState = {
     totalChars: 0,
     correctChars: 0,
     words: [],
-    timerId: null
+    timerId: null,
+    currentInput: '',
+    currentRomaji: ''
 };
 
 // DOM elements
 const startBtn = document.getElementById('startBtn');
 const resetBtn = document.getElementById('resetBtn');
-const userInput = document.getElementById('userInput');
-const targetWord = document.getElementById('targetWord');
+const wordKanji = document.getElementById('wordKanji');
+const wordFurigana = document.getElementById('wordFurigana');
+const wordRomaji = document.getElementById('wordRomaji');
+const inputDisplay = document.getElementById('inputDisplay');
 const wpmDisplay = document.getElementById('wpm');
 const accuracyDisplay = document.getElementById('accuracy');
 const timerDisplay = document.getElementById('timer');
@@ -36,28 +80,62 @@ const wordCountDisplay = document.getElementById('wordCount');
 const totalWordsDisplay = document.getElementById('totalWords');
 const resultsDiv = document.getElementById('results');
 
+// Size controls
+const kanjiSizeInput = document.getElementById('kanjiSize');
+const furiganaSizeInput = document.getElementById('furiganaSize');
+const romajiSizeInput = document.getElementById('romajiSize');
+const kanjiSizeValue = document.getElementById('kanjiSizeValue');
+const furiganaSizeValue = document.getElementById('furiganaSizeValue');
+const romajiSizeValue = document.getElementById('romajiSizeValue');
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     generateWords();
     displayWord();
+    setupSizeControls();
 });
 
 // Event listeners
 startBtn.addEventListener('click', startGame);
 resetBtn.addEventListener('click', resetGame);
-userInput.addEventListener('input', handleInput);
+document.addEventListener('keydown', handleKeyPress);
+
+function setupSizeControls() {
+    kanjiSizeInput.addEventListener('input', (e) => {
+        const size = e.target.value;
+        kanjiSizeValue.textContent = size + 'px';
+        wordKanji.style.fontSize = size + 'px';
+    });
+
+    furiganaSizeInput.addEventListener('input', (e) => {
+        const size = e.target.value;
+        furiganaSizeValue.textContent = size + 'px';
+        wordFurigana.style.fontSize = size + 'px';
+    });
+
+    romajiSizeInput.addEventListener('input', (e) => {
+        const size = e.target.value;
+        romajiSizeValue.textContent = size + 'px';
+        wordRomaji.style.fontSize = size + 'px';
+    });
+}
 
 function generateWords() {
     gameState.words = [];
-    for (let i = 0; i < 100; i++) {
-        gameState.words.push(wordList[Math.floor(Math.random() * wordList.length)]);
+    for (let i = 0; i < 50; i++) {
+        const randomWord = japaneseWords[Math.floor(Math.random() * japaneseWords.length)];
+        gameState.words.push(randomWord);
     }
     totalWordsDisplay.textContent = gameState.words.length;
 }
 
 function displayWord() {
     if (gameState.currentWordIndex < gameState.words.length) {
-        targetWord.textContent = gameState.words[gameState.currentWordIndex];
+        const word = gameState.words[gameState.currentWordIndex];
+        wordKanji.textContent = word.kanji;
+        wordFurigana.textContent = word.furigana;
+        wordRomaji.textContent = word.romaji;
+        gameState.currentRomaji = word.romaji;
     } else {
         endGame();
     }
@@ -72,13 +150,11 @@ function startGame() {
     gameState.correctWords = 0;
     gameState.totalChars = 0;
     gameState.correctChars = 0;
+    gameState.currentInput = '';
     resultsDiv.style.display = 'none';
+    inputDisplay.textContent = '';
 
     startBtn.disabled = true;
-    userInput.disabled = false;
-    userInput.focus();
-    userInput.value = '';
-
     displayWord();
 
     gameState.timerId = setInterval(() => {
@@ -91,37 +167,70 @@ function startGame() {
     }, 1000);
 }
 
-function handleInput(e) {
+function handleKeyPress(e) {
     if (!gameState.isRunning) return;
 
-    const input = e.target.value;
-    const currentWord = gameState.words[gameState.currentWordIndex];
+    const key = e.key.toLowerCase();
+    const currentRomaji = gameState.currentRomaji;
 
-    // Update total characters
-    gameState.totalChars = input.length;
-
-    // Count correct characters
-    gameState.correctChars = 0;
-    for (let i = 0; i < input.length; i++) {
-        if (input[i] === currentWord[i]) {
-            gameState.correctChars++;
-        }
-    }
-
-    // Check if word is completed
-    if (input.endsWith(' ')) {
-        const typedWord = input.trim();
-        if (typedWord === currentWord) {
+    // Handle space to move to next word
+    if (key === ' ') {
+        e.preventDefault();
+        
+        if (gameState.currentInput === currentRomaji) {
             gameState.correctWords++;
         }
-
+        
+        gameState.totalChars += gameState.currentInput.length;
+        gameState.correctChars += gameState.currentInput.length; // All chars were correct to get here
+        
         gameState.currentWordIndex++;
-        userInput.value = '';
+        gameState.currentInput = '';
+        inputDisplay.textContent = '';
         displayWord();
+        updateStats();
+        return;
     }
 
-    // Update statistics
+    // Handle backspace
+    if (key === 'backspace') {
+        e.preventDefault();
+        gameState.currentInput = gameState.currentInput.slice(0, -1);
+    } else if (/^[a-z]$/.test(key)) {
+        // Only allow a-z characters
+        gameState.currentInput += key;
+    } else {
+        return;
+    }
+
+    // Update input display with color feedback
+    updateInputDisplay();
     updateStats();
+}
+
+function updateInputDisplay() {
+    const currentRomaji = gameState.currentRomaji;
+    let html = '';
+
+    for (let i = 0; i < gameState.currentInput.length; i++) {
+        const inputChar = gameState.currentInput[i];
+        const correctChar = currentRomaji[i];
+
+        if (inputChar === correctChar) {
+            // Correct character - light gray
+            html += `<span class="char correct">${inputChar}</span>`;
+        } else {
+            // Incorrect character - red
+            html += `<span class="char incorrect">${inputChar}</span>`;
+        }
+    }
+
+    // Add remaining characters to show
+    for (let i = gameState.currentInput.length; i < currentRomaji.length; i++) {
+        html += `<span class="char waiting">${currentRomaji[i]}</span>`;
+    }
+
+    inputDisplay.innerHTML = html;
 }
 
 function updateStats() {
@@ -131,10 +240,18 @@ function updateStats() {
     const wpm = elapsedMinutes > 0 ? Math.round(gameState.correctWords / elapsedMinutes) : 0;
     wpmDisplay.textContent = wpm;
 
-    // Calculate accuracy
-    const accuracy = gameState.totalChars > 0 
-        ? Math.round((gameState.correctChars / gameState.totalChars) * 100) 
-        : 0;
+    // Calculate accuracy based on current input
+    const currentRomaji = gameState.currentRomaji;
+    let currentCorrect = 0;
+    for (let i = 0; i < gameState.currentInput.length; i++) {
+        if (gameState.currentInput[i] === currentRomaji[i]) {
+            currentCorrect++;
+        }
+    }
+
+    const totalChars = gameState.totalChars + gameState.currentInput.length;
+    const correctChars = gameState.correctChars + currentCorrect;
+    const accuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 0;
     accuracyDisplay.textContent = accuracy + '%';
 
     // Update word count
@@ -146,15 +263,23 @@ function endGame() {
     clearInterval(gameState.timerId);
 
     startBtn.disabled = false;
-    userInput.disabled = true;
 
     // Calculate final stats
     const elapsedSeconds = gameState.totalTime - gameState.timeLeft;
     const elapsedMinutes = elapsedSeconds / 60;
     const finalWpm = elapsedMinutes > 0 ? Math.round(gameState.correctWords / elapsedMinutes) : 0;
-    const finalAccuracy = gameState.totalChars > 0 
-        ? Math.round((gameState.correctChars / gameState.totalChars) * 100) 
-        : 0;
+    
+    const currentRomaji = gameState.currentRomaji;
+    let currentCorrect = 0;
+    for (let i = 0; i < gameState.currentInput.length; i++) {
+        if (gameState.currentInput[i] === currentRomaji[i]) {
+            currentCorrect++;
+        }
+    }
+    
+    const totalChars = gameState.totalChars + gameState.currentInput.length;
+    const correctChars = gameState.correctChars + currentCorrect;
+    const finalAccuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 0;
 
     // Display results
     document.getElementById('finalWpm').textContent = finalWpm;
@@ -172,11 +297,11 @@ function resetGame() {
     gameState.correctWords = 0;
     gameState.totalChars = 0;
     gameState.correctChars = 0;
+    gameState.currentInput = '';
+    resultsDiv.style.display = 'none';
+    inputDisplay.textContent = '';
 
     startBtn.disabled = false;
-    userInput.disabled = true;
-    userInput.value = '';
-    resultsDiv.style.display = 'none';
 
     wpmDisplay.textContent = '0';
     accuracyDisplay.textContent = '0%';

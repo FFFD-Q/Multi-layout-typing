@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Noto Sans JP';
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     display: flex;
@@ -35,6 +35,73 @@ h1 {
     color: #666;
     margin-bottom: 30px;
     font-size: 1.1em;
+}
+
+.settings-panel {
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 2px solid #e0e0e0;
+}
+
+.settings-panel h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.setting-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.setting-item label {
+    color: #666;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.size-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #ddd;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.size-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.size-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.setting-item span {
+    color: #999;
+    font-size: 0.85em;
 }
 
 .stats-container {
@@ -75,40 +142,79 @@ h1 {
     border: 2px solid #e0e0e0;
 }
 
-.current-word {
+.word-display {
     text-align: center;
     margin-bottom: 30px;
+    line-height: 1.8;
 }
 
-#targetWord {
-    font-size: 2.5em;
+.word-kanji {
+    font-size: 28px;
     font-weight: bold;
     color: #333;
     letter-spacing: 3px;
-    font-family: 'Courier New', monospace;
+    display: block;
+    margin-bottom: 5px;
 }
 
-.input-field {
-    width: 100%;
-    padding: 15px;
-    font-size: 1.1em;
+.word-furigana {
+    font-size: 16px;
+    color: #666;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.word-romaji {
+    font-size: 24px;
+    color: #667eea;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    display: block;
+    letter-spacing: 2px;
+}
+
+.input-display {
+    background: white;
     border: 2px solid #ddd;
     border-radius: 8px;
+    padding: 15px;
+    font-size: 1.2em;
     font-family: 'Courier New', monospace;
-    transition: border-color 0.3s;
+    min-height: 50px;
     margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px;
+    line-height: 1.5;
 }
 
-.input-field:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+.char {
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: bold;
 }
 
-.input-field:disabled {
-    background-color: #f5f5f5;
+.char.correct {
+    background-color: #e8e8e8;
+    color: #666;
+}
+
+.char.incorrect {
+    background-color: #ffebee;
+    color: #c62828;
+    animation: shake 0.3s;
+}
+
+.char.waiting {
     color: #999;
-    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
 }
 
 .word-counter {
@@ -148,6 +254,11 @@ h1 {
 
 .btn-primary:active {
     transform: translateY(0);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .btn-secondary {
@@ -192,8 +303,12 @@ h1 {
         font-size: 2em;
     }
 
-    #targetWord {
-        font-size: 2em;
+    .word-kanji {
+        font-size: 22px;
+    }
+
+    .word-romaji {
+        font-size: 18px;
     }
 
     .stats-container {
@@ -206,5 +321,9 @@ h1 {
 
     .btn {
         width: 100%;
+    }
+
+    .settings-grid {
+        grid-template-columns: 1fr;
     }
 }

@@ -1,15 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Layout Typing Practice</title>
+    <title>マルチレイアウト タイピング練習</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>⌨️ Typing Practice</h1>
-        <p class="subtitle">Improve your typing speed and accuracy</p>
+        <h1>⌨️ タイピング練習</h1>
+        <p class="subtitle">あなたのタイピング速度と正確性を向上させましょう</p>
+
+        <!-- 設定パネル -->
+        <div class="settings-panel">
+            <h3>表示設定</h3>
+            <div class="settings-grid">
+                <div class="setting-item">
+                    <label>漢字サイズ</label>
+                    <input type="range" id="kanjiSize" min="10" max="50" value="28" class="size-slider">
+                    <span id="kanjiSizeValue">28px</span>
+                </div>
+                <div class="setting-item">
+                    <label>フリガナサイズ</label>
+                    <input type="range" id="furiganaSize" min="10" max="50" value="16" class="size-slider">
+                    <span id="furiganaSizeValue">16px</span>
+                </div>
+                <div class="setting-item">
+                    <label>ローマ字サイズ</label>
+                    <input type="range" id="romajiSize" min="10" max="50" value="24" class="size-slider">
+                    <span id="romajiSizeValue">24px</span>
+                </div>
+            </div>
+        </div>
 
         <div class="stats-container">
             <div class="stat">
@@ -17,43 +39,39 @@
                 <span class="stat-value" id="wpm">0</span>
             </div>
             <div class="stat">
-                <span class="stat-label">Accuracy</span>
+                <span class="stat-label">正確性</span>
                 <span class="stat-value" id="accuracy">0%</span>
             </div>
             <div class="stat">
-                <span class="stat-label">Time</span>
+                <span class="stat-label">時間</span>
                 <span class="stat-value" id="timer">60</span>
             </div>
         </div>
 
         <div class="game-area">
-            <div class="current-word">
-                <span id="targetWord">click to start</span>
+            <div class="word-display">
+                <div class="word-kanji" id="wordKanji"></div>
+                <div class="word-furigana" id="wordFurigana"></div>
+                <div class="word-romaji" id="wordRomaji"></div>
             </div>
 
-            <input 
-                type="text" 
-                id="userInput" 
-                class="input-field" 
-                placeholder="Start typing here..."
-                disabled
-            >
+            <div class="input-display" id="inputDisplay"></div>
 
             <div class="word-counter">
-                <span id="wordCount">0</span> / <span id="totalWords">0</span> words
+                <span id="wordCount">0</span> / <span id="totalWords">0</span> 単語
             </div>
         </div>
 
         <div class="button-container">
-            <button id="startBtn" class="btn btn-primary">Start Test</button>
-            <button id="resetBtn" class="btn btn-secondary">Reset</button>
+            <button id="startBtn" class="btn btn-primary">テスト開始</button>
+            <button id="resetBtn" class="btn btn-secondary">リセット</button>
         </div>
 
         <div class="results" id="results" style="display: none;">
-            <h2>Test Complete!</h2>
-            <p>Final WPM: <span id="finalWpm">0</span></p>
-            <p>Accuracy: <span id="finalAccuracy">0%</span></p>
-            <p>Total Words: <span id="finalWords">0</span></p>
+            <h2>テスト完了！</h2>
+            <p>最終WPM: <span id="finalWpm">0</span></p>
+            <p>正確性: <span id="finalAccuracy">0%</span></p>
+            <p>入力した単語数: <span id="finalWords">0</span></p>
         </div>
     </div>
 
