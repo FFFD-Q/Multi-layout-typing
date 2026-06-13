@@ -66,39 +66,52 @@ let gameState = {
     currentRomaji: ''
 };
 
-// DOM elements
-const startBtn = document.getElementById('startBtn');
-const resetBtn = document.getElementById('resetBtn');
-const wordKanji = document.getElementById('wordKanji');
-const wordFurigana = document.getElementById('wordFurigana');
-const wordRomaji = document.getElementById('wordRomaji');
-const inputDisplay = document.getElementById('inputDisplay');
-const wpmDisplay = document.getElementById('wpm');
-const accuracyDisplay = document.getElementById('accuracy');
-const timerDisplay = document.getElementById('timer');
-const wordCountDisplay = document.getElementById('wordCount');
-const totalWordsDisplay = document.getElementById('totalWords');
-const resultsDiv = document.getElementById('results');
+// DOM elements - will be initialized after DOM loads
+let startBtn, resetBtn, wordKanji, wordFurigana, wordRomaji, inputDisplay;
+let wpmDisplay, accuracyDisplay, timerDisplay, wordCountDisplay, totalWordsDisplay, resultsDiv;
+let kanjiSizeInput, furiganaSizeInput, romajiSizeInput, kanjiSizeValue, furiganaSizeValue, romajiSizeValue;
 
-// Size controls
-const kanjiSizeInput = document.getElementById('kanjiSize');
-const furiganaSizeInput = document.getElementById('furiganaSize');
-const romajiSizeInput = document.getElementById('romajiSize');
-const kanjiSizeValue = document.getElementById('kanjiSizeValue');
-const furiganaSizeValue = document.getElementById('furiganaSizeValue');
-const romajiSizeValue = document.getElementById('romajiSizeValue');
+// Initialize all DOM elements
+function initializeDOMElements() {
+    startBtn = document.getElementById('startBtn');
+    resetBtn = document.getElementById('resetBtn');
+    wordKanji = document.getElementById('wordKanji');
+    wordFurigana = document.getElementById('wordFurigana');
+    wordRomaji = document.getElementById('wordRomaji');
+    inputDisplay = document.getElementById('inputDisplay');
+    wpmDisplay = document.getElementById('wpm');
+    accuracyDisplay = document.getElementById('accuracy');
+    timerDisplay = document.getElementById('timer');
+    wordCountDisplay = document.getElementById('wordCount');
+    totalWordsDisplay = document.getElementById('totalWords');
+    resultsDiv = document.getElementById('results');
+    
+    kanjiSizeInput = document.getElementById('kanjiSize');
+    furiganaSizeInput = document.getElementById('furiganaSize');
+    romajiSizeInput = document.getElementById('romajiSize');
+    kanjiSizeValue = document.getElementById('kanjiSizeValue');
+    furiganaSizeValue = document.getElementById('furiganaSizeValue');
+    romajiSizeValue = document.getElementById('romajiSizeValue');
+    
+    console.log('DOM elements initialized');
+}
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM Content Loaded');
+    initializeDOMElements();
     generateWords();
     displayWord();
     setupSizeControls();
+    setupEventListeners();
+    console.log('Game initialized successfully');
 });
 
-// Event listeners
-startBtn.addEventListener('click', startGame);
-resetBtn.addEventListener('click', resetGame);
-document.addEventListener('keydown', handleKeyPress);
+function setupEventListeners() {
+    startBtn.addEventListener('click', startGame);
+    resetBtn.addEventListener('click', resetGame);
+    document.addEventListener('keydown', handleKeyPress);
+}
 
 function setupSizeControls() {
     kanjiSizeInput.addEventListener('input', (e) => {
@@ -179,10 +192,10 @@ function handleKeyPress(e) {
         
         if (gameState.currentInput === currentRomaji) {
             gameState.correctWords++;
+            gameState.correctChars += gameState.currentInput.length;
         }
         
         gameState.totalChars += gameState.currentInput.length;
-        gameState.correctChars += gameState.currentInput.length; // All chars were correct to get here
         
         gameState.currentWordIndex++;
         gameState.currentInput = '';
