@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Layout Typing Practice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>⌨️ Typing Practice</h1>
+        <p class="subtitle">Improve your typing speed and accuracy</p>
+
+        <div class="stats-container">
+            <div class="stat">
+                <span class="stat-label">WPM</span>
+                <span class="stat-value" id="wpm">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Accuracy</span>
+                <span class="stat-value" id="accuracy">0%</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Time</span>
+                <span class="stat-value" id="timer">60</span>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <div class="current-word">
+                <span id="targetWord">click to start</span>
+            </div>
+
+            <input 
+                type="text" 
+                id="userInput" 
+                class="input-field" 
+                placeholder="Start typing here..."
+                disabled
+            >
+
+            <div class="word-counter">
+                <span id="wordCount">0</span> / <span id="totalWords">0</span> words
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button id="startBtn" class="btn btn-primary">Start Test</button>
+            <button id="resetBtn" class="btn btn-secondary">Reset</button>
+        </div>
+
+        <div class="results" id="results" style="display: none;">
+            <h2>Test Complete!</h2>
+            <p>Final WPM: <span id="finalWpm">0</span></p>
+            <p>Accuracy: <span id="finalAccuracy">0%</span></p>
+            <p>Total Words: <span id="finalWords">0</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
